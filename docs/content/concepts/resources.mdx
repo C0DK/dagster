@@ -71,7 +71,7 @@ class MyConnectionResource(ConfigurableResource):
     def request(self, endpoint: str) -> Response:
         return requests.get(
             f"https://my-api.com/{endpoint}",
-            headers={"user-agent": "dagster"},
+            headers={"user-agent": "dagster", "user":self.username},
         )
 
 @asset
