@@ -68,15 +68,15 @@ from requests import Response
 class MyConnectionResource(ConfigurableResource):
     username: str
 
-    def request(self, endpoint: str) -> Response:
+    def get_order_number(self, order_id: int) -> Response:
         return requests.get(
-            f"https://my-api.com/{endpoint}",
+            f"https://my-api.com/{self.username}/orders/{id}",
             headers={"user-agent": "dagster"},
         )
 
 @asset
 def data_from_service(my_conn: MyConnectionResource) -> Dict[str, Any]:
-    return my_conn.request("/fetch_data").json()
+    return my_conn.request(order_id=5).json()
 
 defs = Definitions(
     assets=[data_from_service],
