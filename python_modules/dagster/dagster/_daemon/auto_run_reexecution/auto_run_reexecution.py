@@ -15,7 +15,7 @@ DEFAULT_REEXECUTION_POLICY = ReexecutionStrategy.FROM_FAILURE
 
 
 def filter_runs_to_should_retry(
-    runs: Sequence[DagsterRun], instance: DagsterInstance, default_max_retries: int
+    runs: Sequence[DagsterRun], instance: DagsterInstance, default_max_retries: int | None
 ) -> Iterator[Tuple[DagsterRun, int]]:
     """Return only runs that should retry along with their retry number (1st retry, 2nd, etc.)."""
 
@@ -35,7 +35,7 @@ def filter_runs_to_should_retry(
                 )
                 return None
 
-        if max_retries == 0:
+        if not max_retries:
             return None
 
         # TODO: group these to reduce db calls

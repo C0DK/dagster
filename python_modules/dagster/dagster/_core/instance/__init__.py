@@ -892,7 +892,7 @@ class DagsterInstance(DynamicPartitionsStore):
         return self.get_settings("run_retries").get("enabled", False)
 
     @property
-    def run_retries_max_retries(self) -> int:
+    def run_retries_max_retries(self) -> int | None:
         return self.get_settings("run_retries").get("max_retries")
 
     @property
